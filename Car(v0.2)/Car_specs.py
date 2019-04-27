@@ -1,5 +1,6 @@
-
 import random
+
+
 class Car:
     def __init__(self, distance):
         self.fuel = 100
@@ -40,19 +41,20 @@ class Car:
     def tire_hp(self):
         self.tire -= 1
         if self.tire <= 8:
-            print('Air left: ', self.tire, RED + '(LOW AIR LEVEL)'  + END)
+            print('Air left: ', self.tire, '(LOW AIR LEVEL)')
         else:
             print('Air left: ', self.tire)
     
     def zapravka(self):
         f = random.randint(2, 5)
-        print()
         print ('You got', f, 'litres!')
         if self.fuel + f >= 100:
-            print("Can't refill more, because ", self.fuel, '+', f, ' is more than 100 (more then full tank)')
+            print("Can't refill more, because ", self.fuel, '+', f, ' is equal or more than 100 (100 = full tank)')
+            print('---')
             print()
         else:
             print('---')
+            print()
             self.fuel += f
         
     def repairing(self):
@@ -61,19 +63,26 @@ class Car:
     def moneypocket(self):
         p = random.randint(1, 3)
         self.money += p
-        print('You found ', p, ' coins ')
+        print('You found ', p, ' coin(s) ')
         print('Total money:', self.money)
         print('---')
 
-    def spending(self):
+    def rand_money(self):
         m = random.randint(1, 10)
-        if self.money < m:
+        return m
+
+    def spending(self):
+        j = self.rand_money()
+        if self.money < j:
             return '1'
         else:
             return '0'
+
     def gas_spend(self):
-        self.money -= m
-        print('You spent ', m, ' coins')
+        j = self.rand_money()
+        self.money -= j
+        print()
+        print('You spent ', j, ' coins')
         print("Coins left: ", self.money)
         print('---')
 
@@ -82,9 +91,7 @@ class Car:
 
     def hud(self):
         if self.fuel <= 30:
-            CREDBG = '\33[31m'
-            CEND = '\033[0m'
-            print('- Fuel: ', self.fuel, (CREDBG + "(!LOW FUEL LEVEL!)" + CEND))
+            print('- Fuel:', self.fuel," (LOW FUEL LEVEL!)")
         else:
-            print('- Fuel: ', self.fuel)
-        print('- Dist: ', self.distance)
+            print('- Fuel:', self.fuel)
+        print('- Dist:', self.distance)
